@@ -17,10 +17,14 @@ function App() {
       </div>
       <div>
         <h2 className="ml-6 text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-2 bg-gray-200">To Do:</h2>
-        {taskList.map((task, i) => (
-          <>
-            <ToDo key={i} task={task} />
-          </>
+        {taskList.map((task, index) => (
+          <ToDo
+            key={index}
+            task={task}
+            index={index}
+            taskList={taskList}
+            setTaskList={setTaskList}
+          />
         ))}
       </div>
     </>
