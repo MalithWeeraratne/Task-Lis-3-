@@ -5,23 +5,23 @@ const AddTask = ({ taskList, setTaskList }) => {
   const [projectName, setProjectName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 
-  const handleInput = (e) => { 
+  const handleInput = (e) => {
     const { name, value } = e.target;
     if (name === "project-name") {
       setProjectName(value);
     } else {
       setTaskDescription(value);
-    }   
-  }
+    }
+  };
 
-  const handleAdd = e => {
+  const handleAdd = (e) => {
     e.preventDefault();
     setTaskList([...taskList, { projectName, taskDescription }]);
-    console.log("Task added:", { projectName, taskDescription }); // Debug line
+    // console.log("Task added:", { projectName, taskDescription }); // Debug line
     setAddMode(false);
     setProjectName("");
     setTaskDescription("");
-  }
+  };
 
   return (
     <>
