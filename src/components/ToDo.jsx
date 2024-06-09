@@ -2,7 +2,7 @@ import EditTask from "./EditTask";
 import { useState, useEffect } from "react";
 
 const ToDo = ({ task, index, taskList, setTaskList }) => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(task.duration || 0); // Initialize with existing duration if any
   const [running, setRunning] = useState(false);
 
   useEffect(() => {
@@ -15,9 +15,23 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
     return () => clearInterval(interval);
   }, [running]);
 
+  const handleStop = () => {  
+    setRunning(false);
+
+    const updatedTask = {
+      ...task,
+      duration: time,
+    };
+    const updatedTaskList = taskList.map((t, i) => i === index ? updatedTask : t);
+    setTaskList(updatedTaskList);
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
+    window.location.reload(); // Reload to reflect changes
+  }
+
   const handleDelete = () => {
     const updatedTaskList = taskList.filter((_, i) => i !== index);
     setTaskList(updatedTaskList);
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
   };
 
   return (
@@ -43,7 +57,7 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
           {running ? (
             <button
               className="border rounded-lg py-1 px-3"
-              onClick={() => setRunning(false)}
+              onClick={handleStop} 
             >
               Stop
             </button>
@@ -76,5 +90,3 @@ const ToDo = ({ task, index, taskList, setTaskList }) => {
 };
 
 export default ToDo;
-
-// malith
