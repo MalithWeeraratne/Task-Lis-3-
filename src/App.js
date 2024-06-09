@@ -16,7 +16,9 @@ function App() {
         <p className="text-xl my-2">to add a new task</p>
       </div>
       <div>
-        <h2 className="ml-6 text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-2 bg-gray-200">To Do:</h2>
+        <h2 className="ml-6 text-xl font-semibold w-3/4 max-w-lg my-4 py-2 px-2 bg-gray-200">
+          To Do:
+        </h2>
         {taskList.map((task, index) => (
           <ToDo
             key={index}

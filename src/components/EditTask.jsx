@@ -3,7 +3,9 @@ import { useState } from "react";
 const EditTask = ({ task, index, taskList, setTaskList }) => {
   const [editModal, setEditModal] = useState(false);
   const [projectName, setProjectName] = useState(task.projectName || "");
-  const [taskDescription, setTaskDescription] = useState(task.taskDescription || "");
+  const [taskDescription, setTaskDescription] = useState(
+    task.taskDescription || ""
+  );
 
   const handleInput = (e) => {
     const { name, value } = e.target;

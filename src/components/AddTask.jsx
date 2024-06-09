@@ -4,6 +4,7 @@ const AddTask = ({ taskList, setTaskList }) => {
   const [addMode, setAddMode] = useState(false);
   const [projectName, setProjectName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -12,15 +13,22 @@ const AddTask = ({ taskList, setTaskList }) => {
     } else {
       setTaskDescription(value);
     }
+    if (name === "project-name" && value !== "") {
+      setErrorMessage("Project Name is required");
+    }
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
-    setTaskList([...taskList, { projectName, taskDescription }]);
-    // console.log("Task added:", { projectName, taskDescription }); // Debug line
-    setAddMode(false);
-    setProjectName("");
-    setTaskDescription("");
+    if (!projectName) {
+      setErrorMessage("Project Name is required");
+    } else {
+      setTaskList([...taskList, { projectName, taskDescription }]);
+      // console.log("Task added:", { projectName, taskDescription }); // Debug line
+      setAddMode(false);
+      setProjectName("");
+      setTaskDescription("");
+    }
   };
 
   return (
@@ -64,6 +72,9 @@ const AddTask = ({ taskList, setTaskList }) => {
                   onChange={handleInput}
                   required
                 />
+                <p className="text-red-500 text-center mt-2 mb-5">
+                  {errorMessage}
+                </p>
               </div>
               <div>
                 <label
