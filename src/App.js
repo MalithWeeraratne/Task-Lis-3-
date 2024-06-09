@@ -6,6 +6,15 @@ import ToDo from "./components/ToDo";
 function App() {
   const [taskList, setTaskList] = useState([]);
 
+  useState(() => {
+    let array = localStorage.getItem("taskList"); 
+
+    if(array) {
+      setTaskList(JSON.parse(array));
+    }
+
+  }, [])
+
   return (
     <>
       <h1 className="text-2xl font-bold py-6 pl-6">The Task Tracker</h1>
@@ -22,7 +31,7 @@ function App() {
         {taskList.map((task, index) => (
           <ToDo
             key={index}
-            task={task} 
+            task={task}  
             index={index}
             taskList={taskList}
             setTaskList={setTaskList}
