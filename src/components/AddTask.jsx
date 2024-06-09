@@ -23,6 +23,7 @@ const AddTask = ({ taskList, setTaskList }) => {
     if (!projectName) {
       setErrorMessage("Project Name is required");
     } else {
+        let timestamp = new Date().getTime(); 
       setTaskList([...taskList, { projectName, taskDescription }]);
       // console.log("Task added:", { projectName, taskDescription }); // Debug line
       setAddMode(false);

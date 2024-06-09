@@ -22,7 +22,7 @@ function App() {
         {taskList.map((task, index) => (
           <ToDo
             key={index}
-            task={task}
+            task={task} 
             index={index}
             taskList={taskList}
             setTaskList={setTaskList}
