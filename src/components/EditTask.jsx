@@ -16,6 +16,7 @@ const EditTask = ({ task, index, taskList, setTaskList }) => {
     }
   };
 
+//   zxzax
   const handleEdit = (e) => {
     e.preventDefault();
     const updatedTaskList = taskList.map((t, i) =>
