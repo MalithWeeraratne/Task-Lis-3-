@@ -14,7 +14,7 @@ const AddTask = ({ taskList, setTaskList }) => {
       setTaskDescription(value);
     }
     if (name === "project-name" && value !== "") {
-      setErrorMessage("Project Name is required");
+      setErrorMessage("");
     }
   };
 
@@ -24,17 +24,15 @@ const AddTask = ({ taskList, setTaskList }) => {
       setErrorMessage("Project Name is required");
     } else {
       let timestamp = new Date();
-      let tempList = taskList;
-      tempList.push({
+      let newTask = {
         projectName,
         taskDescription,
         timestamp: timestamp,
         duration: 0,
-      });
-      localStorage.setItem("taskList", JSON.stringify(tempList));
-      window.location.reload();
-    //   setTaskList([...taskList, { projectName, taskDescription }]);
-    //   // console.log("Task added:", { projectName, taskDescription }); // Debug line
+      };
+      let updatedTaskList = [...taskList, newTask];
+      setTaskList(updatedTaskList);
+      localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
       setAddMode(false);
       setProjectName("");
       setTaskDescription("");
@@ -52,7 +50,7 @@ const AddTask = ({ taskList, setTaskList }) => {
       </button>
 
       {addMode && (
-        <div className="flex items-center justify-center overflow-x-hidden overflow-y-auto fixed inset-0 z-100">
+        <div className="flex items-center justify-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 bg-black bg-opacity-50">
           <div className="w-9/12 max-w-lg bg-white rounded-lg shadow-md relative flex flex-col">
             <div className="w-full flex flex-row justify-between p-5">
               <h3 className="text-3xl font-semibold">Add New Task</h3>
@@ -105,7 +103,7 @@ const AddTask = ({ taskList, setTaskList }) => {
               </div>
               <button
                 className="bg-blue-500 text-white uppercase text-sm font-semibold py-3 px-6 rounded hover:opacity-70"
-                type="submit" // Changed to submit
+                type="submit"
               >
                 Add Task
               </button>

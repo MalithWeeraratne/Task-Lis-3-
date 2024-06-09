@@ -20,7 +20,7 @@ const EditTask = ({ task, index, taskList, setTaskList }) => {
       i === index ? { ...t, projectName, taskDescription } : t
     );
     setTaskList(updatedTaskList);
-    localStorage.setItem("taskList", JSON.stringify(updatedTaskList)); // Update local storage
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
     setEditModal(false);
   };
 
